@@ -1,0 +1,27 @@
+.logo {
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #2ECC71;
+    box-shadow: 0px 0px 10px 4px black;
+}
+
+.head-btns {
+    display: flex;
+    width: 20%;
+    justify-content: space-evenly;
+    align-items: center;
+    button {
+        border: none;
+        border-radius: 10px;
+        padding: 0px 5px 0px 5px;
+        &:hover {
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            // background-color: cornflowerblue;
+        }
+    }
+}
