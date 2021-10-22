@@ -2,14 +2,36 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {setUser} from '../redux/dux/userReducer';
 
 const Auth = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const login = () => {
-        axios.post(email, password)
+    const register = () => {
+        axios.post('/api/register', {email, password})
+        // .then(data => props.setUser(data))
+        .then(res => {
+            props.setUser(res.data)
+            console.log(res.data)
+        })
+        .catch(err => console.log(err))
+        console.log('DATA:', email, password);
     }
+
+    // .then(player => {
+    //     props.setPlayer(player.data)
+    //     props.loggedIn(player.data)
+    //     console.log(player.data)
+        
+    //     if (player.statusText === 'Accepted') {
+    //         console.log(player.statusText, '++')
+    //         // checkRoute()
+    //     } else {
+    //         console.log(player.statusText, '--')
+    //     }
+    // })
+    // .catch(error => console.log(error))
 
     return (
         <div>
@@ -27,9 +49,11 @@ const Auth = (props) => {
                 onChange={(evt) => setPassword(evt.target.value)}
                 />
             <button 
-                onClick={login} > Login 
+                onClick={register} > Register
             </button>
         </div>
     )
 }
-export default withRouter(Auth);
+const mapStateToProps = reduxState => reduxState;
+
+export default connect(mapStateToProps, {setUser})(withRouter(Auth));
